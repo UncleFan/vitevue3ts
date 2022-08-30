@@ -1,52 +1,27 @@
-<script setup lang="ts">
-import { ref } from 'vue'
-
-defineProps<{ msg: string }>()
-
-const count = ref(0)
-</script>
-
 <template>
-  <h1>{{ msg }}</h1>
-
-  <p>
-    Recommended IDE setup:
-    <a href="https://code.visualstudio.com/" target="_blank">VSCode</a>
-    +
-    <a href="https://github.com/johnsoncodehk/volar" target="_blank">Volar</a>
-  </p>
-
-  <p>See <code>README.md</code> for more information.</p>
-
-  <p>
-    <a href="https://vitejs.dev/guide/features.html" target="_blank">
-      Vite Docs
-    </a>
-    |
-    <a href="https://v3.vuejs.org/" target="_blank">Vue 3 Docs</a>
-  </p>
-
-  <button type="button" @click="count++">count is: {{ count }}</button>
-  <p>
-    Edit
-    <code>components/HelloWorld.vue</code> to test hot module replacement.
-  </p>
+    <button @click="changePersonName">改名字</button>
 </template>
 
-<style scoped>
-a {
-  color: #42b983;
-}
+<script setup>
+// import { defineProps, defineEmits } from 'vue'
+// props声明
+const props = defineProps({
+  person: {
+    type: Object,
+    default() {
+      return {}
+    }
+  }
+})
 
-label {
-  margin: 0 0.5em;
-  font-weight: bold;
-}
+// 声明事件
+const emit = defineEmits(['update:person'])
 
-code {
-  background-color: #eee;
-  padding: 2px 4px;
-  border-radius: 4px;
-  color: #304455;
+const changePersonName = () => {
+  props.person.name = "小红"
+  // 执行
+  emit('update:person', props.person)
 }
-</style>
+</script>
+
+<style></style>
